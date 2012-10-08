@@ -466,9 +466,9 @@ inline.lexer = function(src) {
     // code
     if (cap = inline.code.exec(src)) {
       src = src.substring(cap[0].length);
-      out += '<code>'
+      out += '<code class="inline-code-block"> '
         + escape(cap[2], true)
-        + '</code>';
+        + ' </code>';
       continue;
     }
 
@@ -559,7 +559,7 @@ function tok() {
         token.text = escape(token.text, true);
       }
 
-      return '<pre><code'
+      return '<br/><table class="code-block"><tr><td><pre><code'
         + (token.lang
         ? ' class="lang-'
         + token.lang
@@ -568,7 +568,7 @@ function tok() {
         : '')
         + '>'
         + token.text
-        + '</code></pre>\n';
+        + '</code></pre></td></tr></table><br/>\n';
     }
     case 'blockquote_start': {
       var body = '';
@@ -606,7 +606,7 @@ function tok() {
           : tok();
       }
 
-      return '<li>'
+      return '<li> &nbsp; &nbsp; &nbsp; &nbsp; &bull; '
         + body
         + '</li>\n';
     }
@@ -617,7 +617,7 @@ function tok() {
         body += tok();
       }
 
-      return '<li>'
+      return '<li> &bull; '
         + body
         + '</li>\n';
     }
